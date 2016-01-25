@@ -1,1 +1,361 @@
-My Page
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Subscription System Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["Node"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="Node">Node</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Subscription Documentation </p>
+
+<h1 id="signup">SignUp</h1>
+
+<h2 id="paypal-payment-sign-up">Paypal Payment Sign Up</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/paypal/sign-up/licensee"</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+  <span class="na">plan</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">planId</span><span class="p">:</span> <span class="s2">"Monstercat Subscription Gold month development"</span>
+  <span class="p">},</span>
+  <span class="na">userEmail</span><span class="p">:</span> <span class="s2">"test@monstercat.com"</span><span class="p">,</span>
+  <span class="na">referralCode</span><span class="p">:</span> <span class="s2">"NyKkQAlue"</span>
+<span class="p">}).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-1P504168A6727094R"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://connect.monstercat.com/subscription/paypal/sign-up/licensee</code></p>
+
+<h2 id="stripe-payment-sign-up">Stripe Payment Sign Up</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/stripe/sign-up/licensee"</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+  <span class="na">returnUrl</span><span class="p">:</span> <span class="s2">"#{location.protocol}//#{location.host}/#sign-up/:code"</span>
+  <span class="na">plan</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">planId</span><span class="p">:</span> <span class="s2">"Monstercat Subscription Gold month development"</span>
+  <span class="p">},</span>
+  <span class="na">stripeToken</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+  <span class="na">userEmail</span><span class="p">:</span> <span class="s2">"test@monstercat.com"</span><span class="p">,</span>
+  <span class="na">referralCode</span><span class="p">:</span> <span class="s2">"NyKkQAlue"</span>
+<span class="p">}).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d5d9c22e0baf63a4a521c"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCanceling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCurrentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCustomerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_7kFLnZfZcm5aIz"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_7kFLIrkV7Nagic"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack+uto@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stripe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPeriodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-18T21:48:12.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat Subscription Gold  month development"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d5d9c22e0baf63a4a521d"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlanDetails"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"channelNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$9.99/MONTH"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pk_test_4ag4k0EknfknJi4TwJzoEO1e"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"planId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat Subscription Gold  month development"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"userTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"golden"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d5d9c22e0baf63a4a521d"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"verify"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8c1a5f56a5b45a79fc7aeda51455688"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"golden"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"verify"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e8c1a5f56a5b45a79fc7aeda51455688"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-18T21:48:12.047Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"52199744a7a952b793c0a771"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"newSubscriber"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PayPal"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionModelId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d5d9c22e0baf63a4a521c"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://connect.monstercat.com/subscription/stripe/sign-up/licensee</code></p>
+
+<h1 id="subscription">Subscription</h1>
+
+<h2 id="retrieve-subscription">Retrieve Subscription</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/569c99290f979d1d3121dcaa"</span><span class="p">).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"subscriptionPlanDetails"</span><span class="p">:</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"userTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"licensee"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="w"> </span><span class="p">],</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$14.99/MONTH"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"dollarCost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pk_test_4ag4k0EknfknJi4TwJzoEO1e"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"channelNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"planId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPeriodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wed Feb 17 2016 23:50:02 GMT-0800 (PST)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stripe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack+9923@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_7k2DUeDJFnZvru"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCurrentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCanceling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCustomerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_7k2DuqW4YYTPKK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcaa"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://connect.monstercat.com/subscription/:id</code></p>
+
+<h2 id="add-channel">Add Channel</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/addChannel/569c99290f979d1d3121dcaa"</span><span class="p">).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"subscriptionPlanDetails"</span><span class="p">:</span><span class="w">
+       </span><span class="p">{</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$19.98/MONTH"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"dollarCost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pk_test_4ag4k0EknfknJi4TwJzoEO1e"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"userTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"licensee"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="w"> </span><span class="p">],</span><span class="w">
+         </span><span class="nt">"channelNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1998</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"planId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 3 channels development"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 3 channels development"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPeriodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wed Feb 17 2016 23:50:02 GMT-0800 (PST)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stripe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack+9923@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_7k2DUeDJFnZvru"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCurrentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1998</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCanceling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCustomerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_7k2DuqW4YYTPKK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcaa"</span><span class="w"> 
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://connect.monstercat.com/subscription/addChannel/:id</code></p>
+
+<h2 id="update-subscription">Update Subscription</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/update/569c99290f979d1d3121dcaa"</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+  <span class="na">plan</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">planId</span><span class="p">:</span> <span class="s2">"Monstercat Subscription Gold month development"</span>
+  <span class="p">}</span>
+<span class="p">}).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:{</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"subscriptionPlanDetails"</span><span class="p">:</span><span class="w">
+       </span><span class="p">{</span><span class="w"> </span><span class="nt">"userTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"licensee"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="w"> </span><span class="p">],</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$14.99/MONTH"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"dollarCost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pk_test_4ag4k0EknfknJi4TwJzoEO1e"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"channelNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"planId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcab"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPeriodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wed Feb 17 2016 23:50:02 GMT-0800 (PST)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stripe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_7k2DUeDJFnZvru"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCurrentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCanceling"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCustomerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_7k2DuqW4YYTPKK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569c99290f979d1d3121dcaa"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://connect.monstercat.com/subscription/update/:id</code></p>
+
+<h2 id="cancel-subscription">Cancel Subscription</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"https://connect.monstercat.com/subscription/cancel/569c99290f979d1d3121dcaa"</span><span class="p">).</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// asynchronously called</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"subscription"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"subscriptionPlanDetails"</span><span class="p">:</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"licensee"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$14.99/MONTH"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"dollarCost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pk_test_4ag4k0EknfknJi4TwJzoEO1e"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"development"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"channelNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"planId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d7b6b762776a842d06be5"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPlan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monstercat License Subscription  1 months 2 channels development"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPeriodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu Feb 18 2016 15:55:23 GMT-0800 (PST)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stripe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionPaymentEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack+upgrade@monstercat.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub_7kHPNxFkBhulQ2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCurrentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCanceling"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptionCustomerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cus_7kHP4P8p36kPdd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"569d7b6b762776a842d06bea"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://connect.monstercat.com/subscription/cancel/:id</code></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="Node">Node</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
